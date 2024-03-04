@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   height: 100%;
   display: flex;
@@ -59,7 +59,8 @@ const RightSection = styled.div`
   padding: 1rem 2rem;
 
   @media only screen and (max-width: 767px) {
-    flex: 0 0 100%;
+    flex: 1 1 100%;
+    padding: 1rem;
   }
 `;
 
@@ -75,6 +76,10 @@ const FormArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 767px) {
+    height: unset;
+  }
 `;
 
 const AuthLayout2 = ({ children }) => {
