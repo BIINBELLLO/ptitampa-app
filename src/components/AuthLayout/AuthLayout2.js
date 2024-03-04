@@ -76,10 +76,7 @@ const FormArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @media only screen and (max-width: 767px) {
-    height: unset;
-  }
+  padding: 2rem 0;
 `;
 
 const AuthLayout2 = ({ children }) => {
