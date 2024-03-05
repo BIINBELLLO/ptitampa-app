@@ -1,10 +1,10 @@
 import React from "react";
-import AuthLayout2 from "../../components/AuthLayout/AuthLayout2";
 import { Form } from "antd";
 import styled from "styled-components";
 import TextInput from "../../components/Input/TextInput";
 import CustomButton from "../../components/Button/CustomButton";
 import BackToLogin from "../../components/BackToLogin/BackToLogin";
+import AuthLayout2 from "../../Layout/AuthLayout/AuthLayout2";
 import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`

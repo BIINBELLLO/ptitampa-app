@@ -1,5 +1,5 @@
 import React from "react";
-import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import AuthLayout from "../../Layout/AuthLayout/AuthLayout";
 import styled from "styled-components";
 import CustomButton from "../../components/Button/CustomButton";
 import BackToLogin from "../../components/BackToLogin/BackToLogin";
