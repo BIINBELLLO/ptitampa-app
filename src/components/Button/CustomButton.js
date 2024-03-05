@@ -14,13 +14,13 @@ const CustomButtonCmp = styled(Button)`
   }
 `;
 
-const CustomButton = ({ text, onSubmit }) => {
+const CustomButton = ({ text, onSubmit, style }) => {
   return (
     <CustomButtonCmp
       onClick={onSubmit}
       type="primary"
       htmlType="submit"
-      style={{ width: "100%" }}
+      style={{ width: "100%", ...style }}
     >
       {text || "Submit"}
     </CustomButtonCmp>

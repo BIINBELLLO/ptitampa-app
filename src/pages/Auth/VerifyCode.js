@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import AuthLayout from "../../Layout/AuthLayout/AuthLayout";
 import styled from "styled-components";
 import { notification } from "antd";
 import CustomButton from "../../components/Button/CustomButton";
