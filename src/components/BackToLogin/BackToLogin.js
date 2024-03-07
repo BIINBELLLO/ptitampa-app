@@ -1,5 +1,6 @@
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const BackWrapper = styled.div`
@@ -14,8 +15,13 @@ const BackWrapper = styled.div`
 `;
 
 const BackToLogin = () => {
+  const navigate = useNavigate();
   return (
-    <BackWrapper>
+    <BackWrapper
+      onClick={() => {
+        navigate("/login");
+      }}
+    >
       <span>
         <ArrowLeftOutlined color="#3F4C5F" size={20} />
       </span>

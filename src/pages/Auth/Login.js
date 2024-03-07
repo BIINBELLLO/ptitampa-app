@@ -3,7 +3,6 @@ import { Form } from "antd";
 import styled from "styled-components";
 import TextInput from "../../components/Input/TextInput";
 import CustomButton from "../../components/Button/CustomButton";
-import BackToLogin from "../../components/BackToLogin/BackToLogin";
 import AuthLayout2 from "../../Layout/AuthLayout/AuthLayout2";
 import { useNavigate } from "react-router-dom";
 
@@ -125,8 +124,6 @@ const Login = () => {
             Sign Up
           </span>
         </SmallText>
-
-        <BackToLogin />
       </Wrapper>
     </AuthLayout2>
   );
