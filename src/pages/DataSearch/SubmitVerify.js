@@ -254,7 +254,7 @@ const SubmitVerify = () => {
             </Dragger>
           </UploadContainer>
 
-          <div style={{ width: "150px", display: "none" }}>
+          <div style={{ width: "150px", marginBottom: "3rem" }}>
             <CustomButton text="Submit Data" />
           </div>
         </FirstWrapper>
