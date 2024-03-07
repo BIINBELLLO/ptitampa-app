@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import DataSearchLayout from "../../Layout/DataSearchLayout/DataSearchLayout";
 import styled from "styled-components";
 import CustomButton from "../../components/Button/CustomButton";
-import { Upload, message } from "antd";
+import { Progress, Upload, message } from "antd";
+import { formatBytes, trimFilename } from "../../utils";
+import { CheckCircleFilled } from "@ant-design/icons";
 
 const FirstWrapper = styled.div`
   max-width: 663px;
@@ -67,13 +69,75 @@ const UploadContainer = styled.div`
   }
 `;
 
+const UploadedItemWrapper = styled.div`
+  border: ${(props) => props.color && `1px solid ${props.color}`};
+  border-radius: 12px;
+  margin: 15px 0 0 0;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: flex-start;
+  background-color: #fff;
+  padding: 1rem;
+`;
+
+const UploadedImg = styled.img``;
+
+const UploadedInnerWrapper = styled.div`
+  width: 100%;
+`;
+
+const UploadedTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
+const FileDetailWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+`;
+
+const FileName = styled.h2`
+  color: #344054;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+`;
+
+const FileSize = styled.p`
+  color: #475467;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+`;
+
+const UploadedBelow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const Percentage = styled.p`
+  color: #344054;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  width: 42px;
+  text-align: right;
+`;
+
 const SubmitVerify = () => {
+  const [fileList, setFileList] = useState([]);
   const { Dragger } = Upload;
   const props = {
     name: "file",
     multiple: true,
     action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
     onChange(info) {
+      const updatedFileList = info.fileList;
+      setFileList(updatedFileList);
       const { status } = info.file;
       if (status !== "uploading") {
         console.log(info.file, info.fileList);
@@ -97,6 +161,55 @@ const SubmitVerify = () => {
     },
   };
 
+  const customItemRender = (originNode, file, _fileList, actions) => {
+    console.log(file);
+    return (
+      <>
+        <UploadedItemWrapper
+          color={
+            file.status === "done"
+              ? "#0074BD"
+              : file.status === "error"
+              ? "red"
+              : "#eaecf0"
+          }
+        >
+          <UploadedImg src={"./assets/upload-icon.svg"} alt="Uploaded" />
+          <UploadedInnerWrapper>
+            <UploadedTop>
+              <FileDetailWrapper>
+                <FileName>{trimFilename(file.name)}</FileName>
+                <FileSize>{formatBytes(file.size)}</FileSize>
+              </FileDetailWrapper>
+              {file.status === "done" ? (
+                <CheckCircleFilled style={{ color: "#0074BD" }} size={16} />
+              ) : file.status === "uploading" || file.status === "error" ? (
+                <img
+                  src={"./assets/bin.svg"}
+                  alt="Bin"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    actions.remove(file);
+                  }}
+                />
+              ) : (
+                ""
+              )}
+            </UploadedTop>
+            <UploadedBelow>
+              <Progress
+                percent={file.percent}
+                showInfo={false}
+                strokeColor={"#0074BD"}
+              />
+              <Percentage>{file.percent} %</Percentage>
+            </UploadedBelow>
+          </UploadedInnerWrapper>
+        </UploadedItemWrapper>
+      </>
+    );
+  };
+
   return (
     <>
       <DataSearchLayout>
@@ -110,7 +223,12 @@ const SubmitVerify = () => {
           </PageDescription>
 
           <UploadContainer>
-            <Dragger {...props} accept="application/pdf">
+            <Dragger
+              {...props}
+              accept="application/pdf"
+              itemRender={customItemRender}
+              fileList={fileList}
+            >
               <p className="ant-upload-drag-icon">
                 <img src="/assets/upload.svg" alt="Upload" />
               </p>
