@@ -4,6 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import TextInput from "../Input/TextInput";
 import CustomButton from "../Button/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   z-index: 100;
@@ -91,6 +92,7 @@ const MobileMenuIcon = styled.div`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -171,10 +173,18 @@ const Header = () => {
 
             <ButtonWrapper>
               <CustomButton
+                onSubmit={() => {
+                  navigate("/login");
+                }}
                 style={{ backgroundColor: "transparent", color: "#475467" }}
                 text="Log in"
               />
-              <CustomButton text="Sign up" />
+              <CustomButton
+                onSubmit={() => {
+                  navigate("/register");
+                }}
+                text="Sign up"
+              />
             </ButtonWrapper>
           </SecondSection>
           <MobileMenuIcon>
