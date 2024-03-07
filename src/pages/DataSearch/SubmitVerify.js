@@ -124,6 +124,8 @@ const Percentage = styled.p`
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+  width: 42px;
+  text-align: right;
 `;
 
 const SubmitVerify = () => {
@@ -200,7 +202,7 @@ const SubmitVerify = () => {
                 showInfo={false}
                 strokeColor={"#0074BD"}
               />
-              <Percentage>100%</Percentage>
+              <Percentage>{file.percent} %</Percentage>
             </UploadedBelow>
           </UploadedInnerWrapper>
         </UploadedItemWrapper>
