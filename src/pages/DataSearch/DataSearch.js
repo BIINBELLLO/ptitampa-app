@@ -52,9 +52,9 @@ const CardContainer = styled.div`
   justify-content: space-between;
   padding: 2rem 0;
 
-  @media only screen and (max-width: 1245px) {
+  /* @media only screen and (max-width: 1245px) {
     padding: 2rem 1rem;
-  }
+  } */
 
   @media only screen and (max-width: 905px) {
     flex-wrap: wrap;
