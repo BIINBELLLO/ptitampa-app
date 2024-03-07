@@ -41,6 +41,7 @@ const PageDescription = styled.p`
 `;
 
 const UploadContainer = styled.div`
+  padding-bottom: 3rem;
   max-width: 512px;
   width: 100%;
   display: flex;
