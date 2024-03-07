@@ -48,16 +48,16 @@ const CustomForm = styled(Form)`
 
 const CardContainer = styled.div`
   display: flex;
-  gap: 5px;
-  justify-content: space-between;
+  gap: 20px;
+  justify-content: flex-start;
   padding: 2rem 0;
+  flex-wrap: wrap;
 
   /* @media only screen and (max-width: 1245px) {
     padding: 2rem 1rem;
   } */
 
   @media only screen and (max-width: 905px) {
-    flex-wrap: wrap;
     gap: 15px;
   }
 
@@ -68,11 +68,15 @@ const CardContainer = styled.div`
 
 const CardWrapper = styled.div`
   width: 100%;
-  flex: 0 0 33%;
+  flex: 0 0 32%;
+
+  @media only screen and (max-width: 1032px) {
+    flex: 0 0 30%;
+  }
 
   @media only screen and (max-width: 905px) {
     width: 100%;
-    flex: 0 0 49%;
+    flex: 0 0 48%;
   }
 
   @media only screen and (max-width: 640px) {
@@ -172,6 +176,12 @@ const DataSearch = () => {
 
         <CardContainer>
           {[
+            { fileName: "Example File Name", fileSize: "1.25MB" },
+            { fileName: "Example File Name", fileSize: "1.25MB" },
+            { fileName: "Example File Name", fileSize: "1.25MB" },
+            { fileName: "Example File Name", fileSize: "1.25MB" },
+            { fileName: "Example File Name", fileSize: "1.25MB" },
+            { fileName: "Example File Name", fileSize: "1.25MB" },
             { fileName: "Example File Name", fileSize: "1.25MB" },
             { fileName: "Example File Name", fileSize: "1.25MB" },
             { fileName: "Example File Name", fileSize: "1.25MB" },
