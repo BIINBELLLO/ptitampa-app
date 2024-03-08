@@ -203,7 +203,7 @@ const SubmitVerify = () => {
                 showInfo={false}
                 strokeColor={"#0074BD"}
               />
-              <Percentage>{file.percent} %</Percentage>
+              <Percentage>{Math.round(file.percent)} %</Percentage>
             </UploadedBelow>
           </UploadedInnerWrapper>
         </UploadedItemWrapper>
