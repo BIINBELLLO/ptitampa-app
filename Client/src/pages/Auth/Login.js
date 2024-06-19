@@ -5,6 +5,7 @@ import TextInput from "../../components/Input/TextInput";
 import CustomButton from "../../components/Button/CustomButton";
 import AuthLayout2 from "../../Layout/AuthLayout/AuthLayout2";
 import { useNavigate } from "react-router-dom";
+import httpClient from '../../httpclient/httpclient';
 
 const Wrapper = styled.div`
   display: flex;
@@ -40,8 +41,19 @@ const Login = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("Received values of form: ", values);
+    try {
+      const creds = await httpClient.post('/auth/sign-in', {email: values.email, password: values.password});
+      if (!creds.data) {
+        alert("Invalid Username or password.");
+        return;
+      }
+      navigate('/data-search');
+    } catch (e) {
+      throw e;
+    }
+
   };
   return (
     <AuthLayout2>
