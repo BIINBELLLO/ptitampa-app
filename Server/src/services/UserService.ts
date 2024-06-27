@@ -1,6 +1,7 @@
 import { AppDataSource } from "../config/data-source";
 import { User } from "../entities/User";
-import { GenerateHash } from "../utils/hash";
+import { GenerateHash, GenerateOTP, GenerateJWT } from "../utils/utils";
+
 export class UserService {
   private readonly userRepository = AppDataSource.getRepository(User);
 
@@ -14,7 +15,7 @@ export class UserService {
       return 0;
     }
 
-    const hashPass = await GenerateHash(data.password!)
+    const hashPass = await GenerateHash(data.password!);
     if (hashPass == "") {
       return -2;
     }
@@ -26,19 +27,29 @@ export class UserService {
     return 0;
   }
 
-  async verifyUser(data: Partial<{email: string, password:string}>): Promise<string>{
+  async verifyUser(data: Partial<{email: string, password:string}>): Promise<{token: string, email: string, id: string} | null>{
     if (data.email == "" || data.password == "") {
-      return "";
+      return null;
     }
     const hashedPass = await GenerateHash(data.password!);
-    const user: User | null = await this.userRepository.findOneBy({email: data.email, password:  hashedPass});
+    const user: User | null = await this.userRepository.findOneBy({email: data.email, password: hashedPass});
     if (user == null) {
-      return "";
+      return null;
     }
-    return user.id;
+    return {token: GenerateJWT(user.id), email: user.email, id: user.id};
   }
 
   async getAllUsers(): Promise<User[]> {
     return this.userRepository.find();
   }
+
+  updatePassword = async (data: {email: string, password: string}) => {
+    const user: User | null = await this.userRepository.findOneBy({email: data.email});
+    const hashPass = await GenerateHash(data.password!);
+    return await this.userRepository.update({id: user?.id}, {password: hashPass});
+  };
+
+  generateOTP = () : string => {
+    return GenerateOTP();
+  };
 }

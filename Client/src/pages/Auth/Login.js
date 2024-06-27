@@ -6,6 +6,7 @@ import CustomButton from "../../components/Button/CustomButton";
 import AuthLayout2 from "../../Layout/AuthLayout/AuthLayout2";
 import { useNavigate } from "react-router-dom";
 import httpClient from '../../httpclient/httpclient';
+import { CreateSession } from "../../helper/utils";
 
 const Wrapper = styled.div`
   display: flex;
@@ -49,6 +50,7 @@ const Login = () => {
         alert("Invalid Username or password.");
         return;
       }
+      CreateSession(creds.data.token);
       navigate('/data-search');
     } catch (e) {
       throw e;

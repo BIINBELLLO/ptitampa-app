@@ -38,4 +38,14 @@ export default class UserController {
     const users = await this.userService.getAllUsers();
     return res.json(users);
   };
+
+  updatePassword = async (req: Request, res: Response) => {
+    const users = await this.userService.getAllUsers();
+    return res.json(users);
+  };
+  
+  // Forget password not implemented
+  generateOTP = async (req: Request, res: Response) => {
+    return res.json({OTP: this.userService.generateOTP()});
+  };
 }
