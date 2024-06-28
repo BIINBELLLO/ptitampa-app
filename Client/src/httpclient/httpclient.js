@@ -2,7 +2,7 @@ import axios from "axios"
 
 // Create an instance of axios
 const httpClient = axios.create({
-  baseURL: 'http://localhost:3000/api', // Default base URL
+  baseURL: 'https://ptitampa-app-production.up.railway.app', // Default base URL
   headers: {
     'Content-Type': 'application/json',
   },
