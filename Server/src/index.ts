@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import express from "express";
+import express, { response } from "express";
 import dotenv from "dotenv";
 import { AppDataSource } from "./config/data-source";
 import userRoutes from "./routes/UserRoutes";
@@ -11,9 +11,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors({origin: "https://ptitampa.netlify.app"}));
+app.use(cors({origin: "*"}));
 app.use(express.json());
 app.use("/api/auth", userRoutes);
+app.use("/", (req, res) => {res.send("ptitampa backend service")});
 AppDataSource.initialize()
   .then(() => {
     logger.info("Data Source has been initialized!");
