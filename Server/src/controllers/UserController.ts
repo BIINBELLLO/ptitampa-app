@@ -25,7 +25,7 @@ export default class UserController {
   signInUser = async (req: Request, res: Response) => {
     try {
       const userid = await this.userService.verifyUser(req.body);
-      if (userid == "") {
+      if (userid == null) {
         return res.status(200).json(null);
       }
       return res.json(userid);

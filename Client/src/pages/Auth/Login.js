@@ -53,7 +53,7 @@ const Login = () => {
       CreateSession(creds.data.token);
       navigate('/data-search');
     } catch (e) {
-      throw e;
+      alert("Invalid Username or password.");
     }
 
   };
