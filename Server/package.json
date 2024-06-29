@@ -6,7 +6,11 @@
   "scripts": {
     "start": "npx ts-node src/index.ts",
     "build": "tsc",
-    "dev": "ts-node-dev --respawn src/index.ts"
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "entity:create": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm entity:create -n",
+    "migrate:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -n",
+    "migrate:run": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run",
+    "migrate:revert": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert"
   },
   "keywords": [],
   "author": "",

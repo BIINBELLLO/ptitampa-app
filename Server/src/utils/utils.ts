@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { logger } from './logger';
 import dotenv from "dotenv";
 import { AppDataSource } from '../config/data-source';
-import { User } from '../entities/User';
+import { User } from '../entities/UserEntity';
 
 dotenv.config();
 

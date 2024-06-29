@@ -1,5 +1,5 @@
 import { AppDataSource } from "../config/data-source";
-import { User } from "../entities/User";
+import { User } from "../entities/UserEntity";
 import { GenerateHash, GenerateOTP, GenerateJWT } from "../utils/utils";
 
 export class UserService {
