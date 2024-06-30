@@ -3,6 +3,7 @@ import { logger } from './logger';
 import dotenv from "dotenv";
 import { AppDataSource } from '../config/data-source';
 import { User } from '../entities/UserEntity';
+import { NextFunction } from 'express';
 
 dotenv.config();
 
@@ -37,15 +38,14 @@ export const GenerateJWT = (userId: string): string => {
   return jwt.sign({ userId: userId }, process.env.JWTPRIVATEKEY);
 }
 
-export const AuthMiddleware = async (req: any, res: any, next: () => {}) => {
+export const AuthMiddleware = async (req: any, res: any, next: NextFunction) => {
 
   const userRepository = AppDataSource.getRepository(User);
   
   try {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.JWTPRIVATEKEY);
-    const userId = decodedToken.userId;
-    if (!req.body.userId) {
+    if (!decodedToken.userId) {
       throw 'Invalid user ID';
     } else {
       await userRepository.findOneBy({id: decodedToken.userId})
