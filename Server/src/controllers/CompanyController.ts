@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CompanyService } from "../services/CompanyService";
 import { Company } from "../entities/CompanyEntity";
+import { PaginationResult } from "../utils/interfaces/pagination.interface"
 
 export default class CompanyController {
   private companyService = new CompanyService();
@@ -18,8 +19,11 @@ export default class CompanyController {
   };
 
   getAllCompanies = async (req: Request, res: Response) => {
+    const page = parseInt(req.query.page as string) || 1;
+    const pageSize = parseInt(req.query.pageSize as string) || 10;
+    const search = req.query.search?.toString() ? req.query.search.toString() : "";
     try {
-      const companyList: Company[] | null = await this.companyService.getAllCompanies()
+      const companyList: PaginationResult<Company> = await this.companyService.getAllCompanies(page, pageSize, search)
       if (companyList == null) {
         return res.status(404).json(null);
       }

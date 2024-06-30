@@ -1,5 +1,7 @@
+import { ILike, Like } from "typeorm";
 import { AppDataSource } from "../config/data-source";
 import { Company } from "../entities/CompanyEntity";
+import { PaginationResult } from "../utils/interfaces/pagination.interface";
 import { SeedCompanyData } from "../utils/seed";
 
 export class CompanyService {
@@ -25,13 +27,29 @@ export class CompanyService {
     }
   }
 
-  getAllCompanies = async () => {
+  getAllCompanies = async (page: number, pageSize: number, searchText: string) : Promise<PaginationResult<Company>>=> {
     try {
-      const companyList: Company[] = await this.companyRepository.find();
-      return companyList;
+      const [result, total]: [Company[], number] = await this.companyRepository.findAndCount({
+        where: { name: ILike('%' + searchText + '%') }, order: { name: "DESC" },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      });
+    const totalPages = Math.ceil(total / pageSize);
+
+    return {
+      data: result,
+      count: total,
+      totalPages,
+      currentPage: page,
+    };
     } catch (error) {
       console.error("Error during bulk insert:", error);
-      return null;
+      return {
+        data: [],
+        count: 0,
+        totalPages: 0,
+        currentPage: 0,
+      };
     }
   }
   
